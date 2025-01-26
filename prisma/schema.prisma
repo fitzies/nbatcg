@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int    @id @default(autoincrement())
+  phoneNumber String @unique
+  username    String @unique
+
+  cards Card[]
+  packs Pack[]
+}
+
+model Card {
+  id     String @id @default(uuid())
+  User   User   @relation(fields: [userId], references: [id])
+  userId Int
+  Pack   Pack   @relation(fields: [packId], references: [id])
+  packId String
+
+  firstName String
+  lastName  String
+  playerId  Int
+  teamId    Int
+  rarity    Rarity
+}
+
+model Pack {
+  id     String   @id @default(uuid())
+  type   PackType
+  User   User     @relation(fields: [userId], references: [id])
+  userId Int
+  opened Boolean
+
+  players Card[]
+}
+
+enum PackType {
+  WILDWESTERNCONFERENCE
+  EAGEREASTERNCONFERENCE
+}
+
+enum Rarity {
+  NORMAL
+  RARE
+  ULTRARARE
+  LEGENDARY
+}
