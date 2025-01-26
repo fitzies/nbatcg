@@ -2,7 +2,6 @@ import { NoFriendIcon } from "@/components/friend-icon";
 import PageWrapper from "@/components/page-wrapper";
 import { EmptyPlayerCard, PlayerCard } from "@/components/player-card";
 import { getUser } from "@/lib/db";
-import { motion } from "framer-motion";
 
 export default async function Page() {
   const user = await getUser(1);

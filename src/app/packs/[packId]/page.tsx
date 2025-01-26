@@ -1,10 +1,13 @@
 import OpenPack from "@/components/open-pack";
 import PageWrapper from "@/components/page-wrapper";
 import { getPack, setPackAsOpened } from "@/lib/db";
-import { openPack } from "@/utils/players";
 
-export default async function Page({ params }: { params: { packId: string } }) {
-  const pack = await getPack(params.packId);
+export default async function Page(props: {
+  params: Promise<{ packId: string }>;
+}) {
+  const { packId } = await props.params;
+
+  const pack = await getPack(packId);
   if (!pack) {
     return <PageWrapper>This pack does not exist</PageWrapper>;
   }
