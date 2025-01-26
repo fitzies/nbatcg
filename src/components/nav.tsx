@@ -15,7 +15,7 @@ export default function Nav() {
   return (
     <nav className="w-screen px-8 py-6 border-b border-zinc-800 flex justify-center items-center gap-4">
       <NavItem text="Home" />
-      <NavItem text="Collection" />
+      {/* <NavItem text="Collection" /> */}
       <NavItem text="Packs" />
     </nav>
   );
